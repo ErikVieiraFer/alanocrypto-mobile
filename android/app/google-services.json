@@ -7,6 +7,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:508290889017:android:ce5a74af3218db4408e4e8",
+        "android_client_info": {
+          "package_name": "com.alanocrypto.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508290889017-kcm5f3mmnnj8iejn2ro12agrjdjju9hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADUwgaqCqZfwT80gyU2PSWHkxLFRmNrUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508290889017-kcm5f3mmnnj8iejn2ro12agrjdjju9hj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "508290889017-7egn5lkohm9o2r1mnr0hp81i50nirg5r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.erikvieirafer.alanoapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:508290889017:android:b88b93b1c5ff331908e4e8",
         "android_client_info": {
           "package_name": "com.erikvieirafer.alanoapp"

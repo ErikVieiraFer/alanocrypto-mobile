@@ -731,30 +731,16 @@ class _MarketsScreenState extends State<MarketsScreen> with SingleTickerProvider
                                       ),
                                       const SizedBox(width: 16),
                                       Expanded(
-                                        child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children: [
-                                            Icon(
-                                              isPositive
-                                                  ? Icons.arrow_drop_up
-                                                  : Icons.arrow_drop_down,
-                                              color: isPositive
-                                                  ? const Color(0xFF00FF88)
-                                                  : Colors.red,
-                                              size: 20,
-                                            ),
-                                            Text(
-                                              '${priceChange.abs().toStringAsFixed(2)}%',
-                                              textAlign: TextAlign.right,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                                color: isPositive
-                                                    ? const Color(0xFF00FF88)
-                                                    : Colors.red,
-                                              ),
-                                            ),
-                                          ],
+                                        child: Text(
+                                          '${isPositive ? '+' : ''}${priceChange.toStringAsFixed(2)}%',
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: isPositive
+                                                ? const Color(0xFF00FF88)
+                                                : Colors.red,
+                                          ),
                                         ),
                                       ),
                                       const SizedBox(width: 16),

@@ -1,5 +1,5 @@
-name: alanoapp
-description: "App para membros do canal AlanoCryptoFX"
+name: alanocrypto
+description: "AlanoCrypto - Comunidade de Trading"
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -48,6 +48,9 @@ dependencies:
   chewie: ^1.8.5
   record: ^5.1.2
 
+
+dependency_overrides:
+  record_linux: ^1.3.0
 
 dev_dependencies:
   flutter_test:

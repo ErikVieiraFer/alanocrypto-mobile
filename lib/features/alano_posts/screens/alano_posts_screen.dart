@@ -272,7 +272,6 @@ class AlanoPostCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // Imagem do post (quando não há vídeo)
               if (post.imageUrl != null && post.imageUrl!.isNotEmpty && post.videoUrl == null)
                 GestureDetector(
                   onTap: () {
@@ -315,7 +314,6 @@ class AlanoPostCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              // Vídeo com thumbnail customizada
               if (post.videoUrl != null && post.videoUrl!.isNotEmpty)
                 GestureDetector(
                   onTap: () {
@@ -332,7 +330,6 @@ class AlanoPostCard extends StatelessWidget {
                     child: Stack(
                       fit: StackFit.expand,
                       children: [
-                        // Thumbnail customizada ou fallback
                         if (post.imageUrl != null && post.imageUrl!.isNotEmpty)
                           ClipRRect(
                             borderRadius: BorderRadius.circular(12),
@@ -365,7 +362,6 @@ class AlanoPostCard extends StatelessWidget {
                             ),
                           ),
 
-                        // Overlay escuro
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.black.withValues(alpha: 0.3),
@@ -373,7 +369,6 @@ class AlanoPostCard extends StatelessWidget {
                           ),
                         ),
 
-                        // Ícone de play centralizado
                         Center(
                           child: Container(
                             width: 80,
@@ -390,7 +385,6 @@ class AlanoPostCard extends StatelessWidget {
                           ),
                         ),
 
-                        // Badge "Vídeo" no canto superior direito
                         Positioned(
                           top: 12,
                           right: 12,
@@ -463,7 +457,6 @@ class AlanoPostCard extends StatelessWidget {
   }
 }
 
-// Visualizador de imagem em tela cheia (estilo WhatsApp)
 class _FullScreenImageViewer extends StatelessWidget {
   final String imageUrl;
 
@@ -475,7 +468,6 @@ class _FullScreenImageViewer extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          // Imagem centralizada com zoom
           Center(
             child: InteractiveViewer(
               minScale: 0.5,
@@ -498,7 +490,6 @@ class _FullScreenImageViewer extends StatelessWidget {
               ),
             ),
           ),
-          // Botão de fechar
           SafeArea(
             child: Positioned(
               top: 16,

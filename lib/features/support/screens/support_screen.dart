@@ -53,7 +53,7 @@ class SupportScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryGreen.withOpacity(0.15),
+                      color: AppTheme.primaryGreen.withValues(alpha: 0.15),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
@@ -102,13 +102,13 @@ class SupportScreen extends StatelessWidget {
                           end: Alignment.bottomRight,
                           colors: [
                             AppTheme.primaryGreen,
-                            AppTheme.primaryGreen.withOpacity(0.7),
+                            AppTheme.primaryGreen.withValues(alpha: 0.7),
                           ],
                         ),
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
-                            color: AppTheme.primaryGreen.withOpacity(0.3),
+                            color: AppTheme.primaryGreen.withValues(alpha: 0.3),
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
@@ -217,7 +217,7 @@ class SupportScreen extends StatelessWidget {
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: AppTheme.primaryGreen.withOpacity(0.15),
+              color: AppTheme.primaryGreen.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(

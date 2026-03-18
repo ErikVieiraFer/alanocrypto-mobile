@@ -93,7 +93,7 @@ class _NewsSectionState extends State<NewsSection> {
           child: Text(
             'Fique por dentro das últimas tendências do mercado cripto, novidades sobre NFTs e oportunidades de investimento',
             style: AppTheme.bodyMedium.copyWith(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
             ),
           ),
         ),
@@ -126,7 +126,7 @@ class _NewsSectionState extends State<NewsSection> {
                           Text(
                             'Nenhuma notícia disponível',
                             style: AppTheme.bodyMedium.copyWith(
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                             ),
                           ),
                           const SizedBox(height: 8),
@@ -240,7 +240,7 @@ class _NewsCard extends StatelessWidget {
         child: InkWell(
           onTap: () => _launchUrl(article.url),
           borderRadius: AppTheme.largeRadius,
-          splashColor: AppTheme.primaryGreen.withOpacity(0.1),
+          splashColor: AppTheme.primaryGreen.withValues(alpha: 0.1),
           child: Ink(
             decoration: AppTheme.glassCardDecoration,
             child: Column(
@@ -297,7 +297,7 @@ class _NewsCard extends StatelessWidget {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryGreen.withOpacity(0.2),
+                          color: AppTheme.primaryGreen.withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Text(

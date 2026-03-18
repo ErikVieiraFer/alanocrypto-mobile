@@ -31,7 +31,7 @@ class NotificationPermissionDialog extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppTheme.accentGreen.withOpacity(0.1),
+                color: AppTheme.accentGreen.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(
@@ -59,7 +59,7 @@ class NotificationPermissionDialog extends StatelessWidget {
               'Seja notificado instantaneamente quando:',
               style: TextStyle(
                 fontSize: 14,
-                color: AppTheme.textPrimary.withOpacity(0.7),
+                color: AppTheme.textPrimary.withValues(alpha: 0.7),
               ),
               textAlign: TextAlign.center,
             ),
@@ -115,7 +115,7 @@ class NotificationPermissionDialog extends StatelessWidget {
                     child: Text(
                       'Agora Não',
                       style: TextStyle(
-                        color: AppTheme.textPrimary.withOpacity(0.7),
+                        color: AppTheme.textPrimary.withValues(alpha: 0.7),
                       ),
                     ),
                   ),
@@ -165,7 +165,7 @@ class NotificationPermissionDialog extends StatelessWidget {
               'Você pode alterar isso nas configurações a qualquer momento',
               style: TextStyle(
                 fontSize: 11,
-                color: AppTheme.textPrimary.withOpacity(0.5),
+                color: AppTheme.textPrimary.withValues(alpha: 0.5),
               ),
               textAlign: TextAlign.center,
             ),
@@ -188,7 +188,7 @@ class NotificationPermissionDialog extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: iconColor.withOpacity(0.1),
+            color: iconColor.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(icon, size: 20, color: iconColor),

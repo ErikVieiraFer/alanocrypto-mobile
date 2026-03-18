@@ -71,7 +71,6 @@ class UserService {
       if (accountId != null) updates['accountId'] = accountId;
       if (broker != null) updates['broker'] = broker;
 
-      // Adiciona dados customizados se fornecidos
       if (data != null) {
         updates.addAll(data);
       }
@@ -99,19 +98,15 @@ class UserService {
       final UploadTask uploadTask;
 
       if (kIsWeb) {
-        // Na web, usar putData() com bytes
         if (imageBytes != null) {
           uploadTask = ref.putData(imageBytes);
-        }
-        else {
+        } else {
           return null;
         }
       } else {
-        // No mobile, usar putFile()
         if (imageFile != null) {
           uploadTask = ref.putFile(imageFile);
-        }
-        else {
+        } else {
           return null;
         }
       }
@@ -167,7 +162,6 @@ class UserService {
       print('📸 DEBUG - photoURL do FirebaseAuth: ${user.photoURL}');
 
       if (userDoc.exists) {
-        // Usuário já existe - atualizar lastLogin E photoURL se mudou
         final currentData = userDoc.data() as Map<String, dynamic>;
         final currentPhotoURL = currentData['photoURL'] as String?;
 
@@ -175,7 +169,6 @@ class UserService {
           'lastLogin': Timestamp.fromDate(DateTime.now()),
         };
 
-        // Se a foto mudou, atualizar
         if (user.photoURL != null && user.photoURL != currentPhotoURL) {
           updates['photoURL'] = user.photoURL!;
           print('📸 Atualizando foto do usuário: ${user.photoURL}');
@@ -262,6 +255,26 @@ class UserService {
     } catch (e) {
       print('Erro ao criar usuário: $e');
     }
+  }
+
+  Future<void> deleteAccount() async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+
+    final uid = user.uid;
+
+    await _firestore.collection('users').doc(uid).delete();
+
+    final portfolioTransactions = await _firestore
+        .collection('cupula_portfolio_transactions')
+        .where('userId', isEqualTo: uid)
+        .get();
+
+    for (var doc in portfolioTransactions.docs) {
+      await doc.reference.delete();
+    }
+
+    await user.delete();
   }
 
   Future<bool> isUserApproved(String userId) async {

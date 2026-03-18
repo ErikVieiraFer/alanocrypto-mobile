@@ -156,6 +156,45 @@ class _ProfileView extends StatelessWidget {
     }
   }
 
+  Future<void> _deleteAccount(BuildContext context) async {
+    final confirm = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1f25),
+        title: const Text('Excluir Conta', style: TextStyle(color: Colors.white)),
+        content: const Text(
+          'Esta ação é permanente e não pode ser desfeita. Todos os seus dados serão removidos.',
+          style: TextStyle(color: Color(0xFF9ca3af)),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Excluir', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+
+    if (confirm == true && context.mounted) {
+      try {
+        await UserService().deleteAccount();
+        if (context.mounted) {
+          Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+        }
+      } catch (e) {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Erro ao excluir conta. Tente novamente.')),
+          );
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     debugPrint('🔵 _ProfileView.build() - user: ${user.displayName}, isOwnProfile: $isOwnProfile');
@@ -184,6 +223,11 @@ class _ProfileView extends StatelessWidget {
                       IconButton(
                         icon: const Icon(Icons.logout, color: AppTheme.accentGreen),
                         onPressed: () => _logout(context),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.delete_forever_outlined, color: Colors.red),
+                        onPressed: () => _deleteAccount(context),
+                        tooltip: 'Excluir Conta',
                       ),
                     ],
                   ),
@@ -248,8 +292,10 @@ class _UserInfoCard extends StatelessWidget {
             style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            spacing: 12,
+            runSpacing: 8,
+            alignment: WrapAlignment.center,
             children: [
               if (isOwnProfile)
                 _StatusBadge(
@@ -257,8 +303,6 @@ class _UserInfoCard extends StatelessWidget {
                   label: 'Membro desde: $memberSince',
                   color: Colors.blue.shade300,
                 ),
-              if (isOwnProfile && user.isApproved)
-                const SizedBox(width: 12),
               if (user.isApproved)
                 _StatusBadge(
                   icon: Icons.verified,
@@ -370,74 +414,68 @@ class _InfoSection extends StatelessWidget {
         LayoutBuilder(
           builder: (context, constraints) {
             final isTablet = constraints.maxWidth > 600;
-            return GridView.count(
-              crossAxisCount: isTablet ? 2 : 1,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: isTablet ? 4 : 5,
-              mainAxisSpacing: 12,
-              crossAxisSpacing: 12,
+            final tiles = [
+              _InfoTile(icon: Icons.person_outline, label: 'Nome Completo', value: user.displayName),
+              if (showAllData)
+                _InfoTile(icon: Icons.email_outlined, label: 'Email', value: user.email, canCopy: true),
+              if (showAllData)
+                _InfoTile(icon: Icons.phone_outlined, label: 'Telefone', value: formattedPhone, canCopy: true),
+              if (showAllData || (user.telegram != null && user.telegram!.isNotEmpty))
+                _InfoTile(
+                  icon: FontAwesomeIcons.telegram,
+                  label: 'Telegram',
+                  value: user.telegram ?? 'Não informado',
+                  canCopy: user.telegram != null && user.telegram!.isNotEmpty,
+                ),
+              _InfoTile(icon: Icons.flag_outlined, label: 'País', value: user.country),
+              _InfoTile(icon: Icons.star_outline, label: 'Plano', value: user.tier),
+              if (showAllData)
+                _InfoTile(
+                  icon: Icons.numbers,
+                  label: 'ID da Conta',
+                  value: user.accountId ?? 'Não informado',
+                  onTap: isOwnProfile ? () => _showEditAccountIdDialog(context, user) : null,
+                  canCopy: user.accountId != null && user.accountId!.isNotEmpty,
+                ),
+              if (showAllData)
+                _InfoTile(
+                  icon: Icons.business,
+                  label: 'Corretora',
+                  value: user.broker ?? 'Não informada',
+                  onTap: isOwnProfile ? () => _showEditBrokerDialog(context, user) : null,
+                ),
+              if (isAdmin && !isOwnProfile)
+                _InfoTile(
+                  icon: Icons.calendar_today,
+                  label: 'Membro desde',
+                  value: _formatDate(user.createdAt),
+                ),
+              if (isAdmin && !isOwnProfile)
+                _InfoTile(
+                  icon: user.isApproved ? Icons.verified : Icons.pending,
+                  label: 'Status',
+                  value: user.isApproved ? 'Aprovado' : 'Pendente',
+                ),
+            ];
+
+            if (isTablet) {
+              return GridView.count(
+                crossAxisCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                childAspectRatio: 4,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                children: tiles,
+              );
+            }
+
+            return Column(
               children: [
-                // Nome - SEMPRE VISÍVEL
-                _InfoTile(icon: Icons.person_outline, label: 'Nome Completo', value: user.displayName),
-
-                // Email - próprio perfil OU admin
-                if (showAllData)
-                  _InfoTile(icon: Icons.email_outlined, label: 'Email', value: user.email, canCopy: true),
-
-                // Telefone - próprio perfil OU admin
-                if (showAllData)
-                  _InfoTile(icon: Icons.phone_outlined, label: 'Telefone', value: formattedPhone, canCopy: true),
-
-                // Telegram - próprio perfil OU admin OU se preenchido
-                if (showAllData || (user.telegram != null && user.telegram!.isNotEmpty))
-                  _InfoTile(
-                    icon: FontAwesomeIcons.telegram,
-                    label: 'Telegram',
-                    value: user.telegram ?? 'Não informado',
-                    canCopy: user.telegram != null && user.telegram!.isNotEmpty,
-                  ),
-
-                // País - SEMPRE VISÍVEL
-                _InfoTile(icon: Icons.flag_outlined, label: 'País', value: user.country),
-
-                // Plano - SEMPRE VISÍVEL
-                _InfoTile(icon: Icons.star_outline, label: 'Plano', value: user.tier),
-
-                // ID da Conta - próprio perfil OU admin
-                if (showAllData)
-                  _InfoTile(
-                    icon: Icons.numbers,
-                    label: 'ID da Conta',
-                    value: user.accountId ?? 'Não informado',
-                    onTap: isOwnProfile ? () => _showEditAccountIdDialog(context, user) : null,
-                    canCopy: user.accountId != null && user.accountId!.isNotEmpty,
-                  ),
-
-                // Corretora - próprio perfil OU admin
-                if (showAllData)
-                  _InfoTile(
-                    icon: Icons.business,
-                    label: 'Corretora',
-                    value: user.broker ?? 'Não informada',
-                    onTap: isOwnProfile ? () => _showEditBrokerDialog(context, user) : null,
-                  ),
-
-                // Data de criação - APENAS ADMIN vendo outro perfil
-                if (isAdmin && !isOwnProfile)
-                  _InfoTile(
-                    icon: Icons.calendar_today,
-                    label: 'Membro desde',
-                    value: _formatDate(user.createdAt),
-                  ),
-
-                // Status aprovação - APENAS ADMIN
-                if (isAdmin && !isOwnProfile)
-                  _InfoTile(
-                    icon: user.isApproved ? Icons.verified : Icons.pending,
-                    label: 'Status',
-                    value: user.isApproved ? 'Aprovado' : 'Pendente',
-                  ),
+                for (int i = 0; i < tiles.length; i++) ...[
+                  tiles[i],
+                  if (i < tiles.length - 1) const SizedBox(height: 12),
+                ],
               ],
             );
           },
@@ -521,7 +559,7 @@ class _InfoSection extends StatelessWidget {
           backgroundColor: AppTheme.cardDark,
           title: Text('Editar Corretora', style: TextStyle(color: AppTheme.textPrimary)),
           content: DropdownButtonFormField<String>(
-            value: selectedBroker,
+            initialValue: selectedBroker,
             decoration: InputDecoration(
               labelText: 'Corretora',
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -608,7 +646,7 @@ class _InfoTile extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(label, style: const TextStyle(fontSize: 12, color: Colors.white70)),
                 const SizedBox(height: 4),
@@ -1334,7 +1372,7 @@ class _SettingsModalState extends State<_SettingsModal> {
               Switch(
                 value: value,
                 onChanged: onChanged,
-                activeColor: AppTheme.accentGreen,
+                activeThumbColor: AppTheme.accentGreen,
                 activeTrackColor: AppTheme.accentGreen.withValues(alpha: 0.3),
                 inactiveThumbColor: Colors.grey,
                 inactiveTrackColor: Colors.grey.withValues(alpha: 0.3),

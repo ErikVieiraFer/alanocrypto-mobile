@@ -444,9 +444,12 @@ class _ManagementScreenState extends State<ManagementScreen> {
                                 children: [
                                   const Icon(Icons.calendar_today, color: Colors.grey, size: 18),
                                   const SizedBox(width: 12),
-                                  Text(
-                                    '${DateFormat('dd/MM/yyyy').format(_filterStartDate)} - ${DateFormat('dd/MM/yyyy').format(_filterEndDate)}',
-                                    style: const TextStyle(color: Colors.white),
+                                  Expanded(
+                                    child: Text(
+                                      '${DateFormat('dd/MM/yyyy').format(_filterStartDate)} - ${DateFormat('dd/MM/yyyy').format(_filterEndDate)}',
+                                      style: const TextStyle(color: Colors.white),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                 ],
                               ),

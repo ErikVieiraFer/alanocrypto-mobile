@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alanoapp/theme/app_theme.dart';
+import 'package:alanocrypto/theme/app_theme.dart';
 
 class AppLogo extends StatelessWidget {
   final double fontSize;
@@ -14,13 +14,13 @@ class AppLogo extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.3),
+            color: AppTheme.primaryGreen.withValues(alpha: 0.3),
             blurRadius: 20,
             spreadRadius: 5,
             offset: const Offset(0, 0),
           ),
           BoxShadow(
-            color: AppTheme.primaryGreen.withOpacity(0.2),
+            color: AppTheme.primaryGreen.withValues(alpha: 0.2),
             blurRadius: 40,
             spreadRadius: 10,
             offset: const Offset(0, 0),

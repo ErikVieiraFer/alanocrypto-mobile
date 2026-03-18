@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
         '508290889017-vut39rglmo28a8e6p3jg550srr8206i1.apps.googleusercontent.com',
     iosClientId:
         '508290889017-p224pp9boj1t35ril17kv3oh71nof0di.apps.googleusercontent.com',
-    iosBundleId: 'com.example.alanoapp.test',
+    iosBundleId: 'com.alanocrypto.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
         '508290889017-vut39rglmo28a8e6p3jg550srr8206i1.apps.googleusercontent.com',
     iosClientId:
         '508290889017-fpon32gltjocen19s22s5ko9d2cuidvs.apps.googleusercontent.com',
-    iosBundleId: 'com.example.alanoapp',
+    iosBundleId: 'com.alanocrypto.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

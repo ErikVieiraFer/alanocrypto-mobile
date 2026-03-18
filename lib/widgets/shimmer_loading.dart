@@ -118,7 +118,7 @@ class SignalShimmer extends StatelessWidget {
             children: [
               Container(
                 padding: const EdgeInsets.all(18),
-                color: AppTheme.cardMedium.withOpacity(0.3),
+                color: AppTheme.cardMedium.withValues(alpha: 0.3),
                 child: Row(
                   children: [
                     Container(

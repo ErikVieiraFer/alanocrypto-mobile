@@ -608,7 +608,7 @@ class _MarketCryptoCard extends StatelessWidget {
             );
           },
           borderRadius: AppTheme.defaultRadius,
-          splashColor: AppTheme.primaryGreen.withOpacity(0.1),
+          splashColor: AppTheme.primaryGreen.withValues(alpha: 0.1),
           child: Ink(
             padding: const EdgeInsets.all(AppTheme.paddingMedium),
             decoration: AppTheme.modernCard(),

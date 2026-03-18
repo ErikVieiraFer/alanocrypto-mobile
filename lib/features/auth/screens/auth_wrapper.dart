@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:alanoapp/features/auth/screens/login_screen.dart';
-import 'package:alanoapp/features/dashboard/screen/dashboard_screen.dart';
+import 'package:alanocrypto/features/auth/screens/login_screen.dart';
+import 'package:alanocrypto/features/dashboard/screen/dashboard_screen.dart';
 import '../../../theme/app_theme.dart';
 
 class AuthWrapper extends StatelessWidget {

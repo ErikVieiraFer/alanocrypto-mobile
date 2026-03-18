@@ -2,10 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../models/signal_model.dart';
 import '../../../services/signal_service.dart';
 import '../../../theme/app_theme.dart';
 import '../../../widgets/shimmer_loading.dart';
+import '../../../widgets/investment_disclaimer.dart';
 
 class SignalsScreen extends StatefulWidget {
   const SignalsScreen({super.key});
@@ -30,6 +32,24 @@ class _SignalsScreenState extends State<SignalsScreen> {
         });
       }
     });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showDisclaimerIfNeeded());
+  }
+
+  Future<void> _showDisclaimerIfNeeded() async {
+    final prefs = await SharedPreferences.getInstance();
+    final accepted = prefs.getBool('investment_disclaimer_accepted') ?? false;
+    if (!accepted && mounted) {
+      await showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (_) => InvestmentDisclaimer(
+          onAccept: () async {
+            await prefs.setBool('investment_disclaimer_accepted', true);
+            if (mounted) Navigator.of(context).pop();
+          },
+        ),
+      );
+    }
   }
 
   @override

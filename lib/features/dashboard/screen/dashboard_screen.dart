@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:alanoapp/features/home/screens/home_screen.dart';
-import 'package:alanoapp/features/home/screens/group_chat_screen.dart';
-import 'package:alanoapp/features/profile/screens/profile_screen.dart';
-import 'package:alanoapp/features/alano_posts/screens/alano_posts_screen.dart';
-import 'package:alanoapp/features/ai_chat/screens/ai_chat_screen.dart';
-import 'package:alanoapp/features/signals/screens/signals_screen.dart';
-import 'package:alanoapp/features/notifications/screens/notifications_screen.dart';
-import 'package:alanoapp/features/crypto/screens/market_screen.dart';
-import 'package:alanoapp/features/crypto/screens/watchlist_screen.dart';
-import 'package:alanoapp/features/markets/screens/markets_screen.dart';
-import 'package:alanoapp/features/forex/screens/forex_calculator_screen.dart';
-import 'package:alanoapp/features/courses/screens/courses_screen.dart';
-import 'package:alanoapp/features/portfolio/screens/portfolio_screen.dart';
-import 'package:alanoapp/features/links/screens/useful_links_screen.dart';
-import 'package:alanoapp/features/support/screens/support_screen.dart';
-import 'package:alanoapp/features/cupula/screens/cupula_main_screen.dart';
-import 'package:alanoapp/features/cupula/screens/cupula_sales_screen.dart';
-import 'package:alanoapp/features/economic_calendar/screens/economic_calendar_screen.dart';
-// import 'package:alanoapp/features/economic_calendar/screens/economic_calendar_coming_soon_screen.dart'; // DESABILITADO - Funcionalidade implementada
-import 'package:alanoapp/features/management/screens/management_screen.dart';
-import 'package:alanoapp/services/notification_service.dart';
-import 'package:alanoapp/services/fcm_service.dart';
+import 'package:alanocrypto/features/home/screens/home_screen.dart';
+import 'package:alanocrypto/features/home/screens/group_chat_screen.dart';
+import 'package:alanocrypto/features/profile/screens/profile_screen.dart';
+import 'package:alanocrypto/features/alano_posts/screens/alano_posts_screen.dart';
+import 'package:alanocrypto/features/ai_chat/screens/ai_chat_screen.dart';
+import 'package:alanocrypto/features/signals/screens/signals_screen.dart';
+import 'package:alanocrypto/features/notifications/screens/notifications_screen.dart';
+import 'package:alanocrypto/features/crypto/screens/market_screen.dart';
+import 'package:alanocrypto/features/crypto/screens/watchlist_screen.dart';
+import 'package:alanocrypto/features/markets/screens/markets_screen.dart';
+import 'package:alanocrypto/features/forex/screens/forex_calculator_screen.dart';
+import 'package:alanocrypto/features/courses/screens/courses_screen.dart';
+import 'package:alanocrypto/features/portfolio/screens/portfolio_screen.dart';
+import 'package:alanocrypto/features/links/screens/useful_links_screen.dart';
+import 'package:alanocrypto/features/support/screens/support_screen.dart';
+import 'package:alanocrypto/features/cupula/screens/cupula_main_screen.dart';
+import 'package:alanocrypto/features/cupula/screens/cupula_sales_screen.dart';
+import 'package:alanocrypto/features/economic_calendar/screens/economic_calendar_screen.dart';
+// import 'package:alanocrypto/features/economic_calendar/screens/economic_calendar_coming_soon_screen.dart'; // DESABILITADO - Funcionalidade implementada
+import 'package:alanocrypto/features/management/screens/management_screen.dart';
+import 'package:alanocrypto/services/notification_service.dart';
+import 'package:alanocrypto/services/fcm_service.dart';
 import '../../../widgets/app_drawer.dart';
 import '../../../widgets/app_logo.dart';
 import '../../../widgets/welcome_notification_dialog.dart';
@@ -613,7 +613,7 @@ class DashboardScreenState extends State<DashboardScreen> {
       ),
       body: IndexedStack(index: _currentIndex, children: _screens),
       bottomNavigationBar: Container(
-        height: 70,
+        height: 70 + MediaQuery.of(context).padding.bottom,
         decoration: BoxDecoration(
           color: AppTheme.cardDark,
           borderRadius: const BorderRadius.only(

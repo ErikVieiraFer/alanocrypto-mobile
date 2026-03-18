@@ -95,7 +95,7 @@ class _HapticButtonState extends State<HapticButton>
           child: InkWell(
             onTap: () {}, // Necessário para o splash funcionar
             splashColor: widget.splashColor ??
-                AppTheme.primaryGreen.withOpacity(0.2),
+                AppTheme.primaryGreen.withValues(alpha: 0.2),
             borderRadius: widget.borderRadius ?? BorderRadius.circular(12),
             child: Container(
               padding: widget.padding,

@@ -60,27 +60,14 @@ class WelcomeNotificationDialog extends StatelessWidget {
             end: Alignment.bottomRight,
             colors: [
               AppTheme.cardDark,
-              AppTheme.cardDark.withOpacity(0.95),
+              AppTheme.cardDark.withValues(alpha: 0.95),
             ],
           ),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: AppTheme.primaryGreen.withOpacity(0.3),
+            color: AppTheme.primaryGreen.withValues(alpha: 0.3),
             width: 1,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
-            ),
-            BoxShadow(
-              color: AppTheme.primaryGreen.withOpacity(0.2),
-              blurRadius: 40,
-              spreadRadius: 5,
-              offset: const Offset(0, 0),
-            ),
-          ],
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -93,7 +80,7 @@ class WelcomeNotificationDialog extends StatelessWidget {
                   end: Alignment.bottomRight,
                   colors: [
                     AppTheme.primaryGreen,
-                    AppTheme.primaryGreen.withOpacity(0.7),
+                    AppTheme.primaryGreen.withValues(alpha: 0.7),
                   ],
                 ),
                 borderRadius: const BorderRadius.only(
@@ -105,7 +92,7 @@ class WelcomeNotificationDialog extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -156,10 +143,10 @@ class WelcomeNotificationDialog extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppTheme.cardMedium.withOpacity(0.5),
+                      color: AppTheme.cardMedium.withValues(alpha: 0.5),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: AppTheme.borderDark.withOpacity(0.3),
+                        color: AppTheme.borderDark.withValues(alpha: 0.3),
                         width: 1,
                       ),
                     ),
@@ -176,7 +163,7 @@ class WelcomeNotificationDialog extends StatelessWidget {
                             'Dúvidas? Entre em contato com nosso canal de suporte!',
                             style: TextStyle(
                               fontSize: 13,
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha: 0.9),
                               height: 1.4,
                             ),
                           ),
@@ -224,7 +211,7 @@ class WelcomeNotificationDialog extends StatelessWidget {
                         'Fechar',
                         style: TextStyle(
                           fontSize: 11,
-                          color: AppTheme.textSecondary.withOpacity(0.5),
+                          color: AppTheme.textSecondary.withValues(alpha: 0.5),
                           fontWeight: FontWeight.normal,
                         ),
                       ),
@@ -245,7 +232,7 @@ class WelcomeNotificationDialog extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: AppTheme.primaryGreen.withOpacity(0.2),
+            color: AppTheme.primaryGreen.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(8),
           ),
           child: Icon(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:alanoapp/theme/app_theme.dart';
+import 'package:alanocrypto/theme/app_theme.dart';
 import '../features/dashboard/screen/dashboard_screen.dart';
 import '../services/payment_service.dart';
 import '../features/cupula/screens/cupula_sales_screen.dart';
@@ -80,8 +80,8 @@ class _AppDrawerState extends State<AppDrawer> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              AppTheme.backgroundColor.withValues(alpha:0.98),
-              AppTheme.cardDark.withValues(alpha:0.98),
+              AppTheme.backgroundColor,
+              AppTheme.cardDark,
             ],
           ),
           borderRadius: const BorderRadius.only(
@@ -217,22 +217,15 @@ class _AppDrawerState extends State<AppDrawer> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
             AppTheme.primaryGreen,
-            AppTheme.primaryGreen.withValues(alpha:0.7),
+            AppTheme.darkGreen,
           ],
         ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.primaryGreen.withValues(alpha:0.3),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -389,33 +382,19 @@ class _AppDrawerState extends State<AppDrawer> {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
                   AppTheme.primaryGreen,
-                  AppTheme.primaryGreen.withValues(alpha:0.7),
+                  AppTheme.darkGreen,
                 ],
               ),
               borderRadius: BorderRadius.circular(16),
               border: Border.all(
-                color: AppTheme.primaryGreen.withValues(alpha:0.5),
+                color: AppTheme.darkGreen,
                 width: 1,
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: AppTheme.primaryGreen.withValues(alpha:0.4),
-                  blurRadius: 20,
-                  spreadRadius: 2,
-                  offset: const Offset(0, 8),
-                ),
-                BoxShadow(
-                  color: AppTheme.primaryGreen.withValues(alpha:0.3),
-                  blurRadius: 40,
-                  spreadRadius: 5,
-                  offset: const Offset(0, 0),
-                ),
-              ],
             ),
             child: Row(
               children: [

@@ -129,7 +129,7 @@ class AppTheme {
         ? [
             cardShadow,
             BoxShadow(
-              color: primaryGreen.withOpacity(0.1),
+              color: primaryGreen.withValues(alpha: 0.1),
               blurRadius: 20,
               offset: const Offset(0, 8),
             ),
@@ -157,27 +157,27 @@ class AppTheme {
       end: Alignment.bottomRight,
       colors: [
         cardDark,
-        cardDark.withOpacity(0.95),
+        cardDark.withValues(alpha: 0.95),
       ],
     ),
     borderRadius: BorderRadius.circular(18),
     border: Border.all(
-      color: borderDark.withOpacity(0.3),
+      color: borderDark.withValues(alpha: 0.3),
       width: 1,
     ),
     boxShadow: [
       BoxShadow(
-        color: Colors.black.withOpacity(0.12),
+        color: Colors.black.withValues(alpha: 0.12),
         blurRadius: 8,
         offset: const Offset(0, 4),
       ),
       BoxShadow(
-        color: Colors.black.withOpacity(0.08),
+        color: Colors.black.withValues(alpha: 0.08),
         blurRadius: 16,
         offset: const Offset(0, 8),
       ),
       BoxShadow(
-        color: Colors.blue.withOpacity(0.05),
+        color: Colors.blue.withValues(alpha: 0.05),
         blurRadius: 24,
         spreadRadius: -4,
         offset: const Offset(0, 12),
@@ -192,28 +192,28 @@ class AppTheme {
         end: Alignment.bottomRight,
         colors: [
           backgroundColor ?? cardDark,
-          (backgroundColor ?? cardDark).withOpacity(0.95),
+          (backgroundColor ?? cardDark).withValues(alpha: 0.95),
         ],
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: borderDark.withOpacity(0.3),
+        color: borderDark.withValues(alpha: 0.3),
         width: 1,
       ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.12),
+          color: Colors.black.withValues(alpha: 0.12),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: Colors.black.withOpacity(0.08),
+          color: Colors.black.withValues(alpha: 0.08),
           blurRadius: 16,
           offset: const Offset(0, 8),
         ),
         if (glowColor != null)
           BoxShadow(
-            color: glowColor.withOpacity(0.05),
+            color: glowColor.withValues(alpha: 0.05),
             blurRadius: 24,
             spreadRadius: -4,
             offset: const Offset(0, 12),
@@ -236,22 +236,22 @@ class AppTheme {
       ),
       borderRadius: BorderRadius.circular(16),
       border: Border.all(
-        color: borderDark.withOpacity(0.3),
+        color: borderDark.withValues(alpha: 0.3),
         width: 1,
       ),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.12),
+          color: Colors.black.withValues(alpha: 0.12),
           blurRadius: 8,
           offset: const Offset(0, 4),
         ),
         BoxShadow(
-          color: Colors.black.withOpacity(0.08),
+          color: Colors.black.withValues(alpha: 0.08),
           blurRadius: 16,
           offset: const Offset(0, 8),
         ),
         BoxShadow(
-          color: (isLong ? successGreen : errorRed).withOpacity(0.03),
+          color: (isLong ? successGreen : errorRed).withValues(alpha: 0.03),
           blurRadius: 24,
           offset: const Offset(0, 0),
         ),

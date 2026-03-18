@@ -21,14 +21,10 @@ import 'services/user_service.dart';
 import 'services/fcm_service.dart';
 import 'services/notification_preferences_service.dart';
 import 'widgets/loading_screen.dart';
-import 'package:alanoapp/firebase_options.dart';
+import 'package:alanocrypto/firebase_options.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
-// Import condicional para Web
-// ignore: avoid_web_libraries_in_flutter, deprecated_member_use
-import 'dart:js' as js if (dart.library.io) '';
-import 'dart:html' as html if (dart.library.io) '';
-import 'dart:ui' as ui;
+import 'utils/web_notifications.dart';
 
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -55,12 +51,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 void setupNotificationNavigation() {
   if (kIsWeb) {
     try {
-      html.window.addEventListener('message', (event) {
-        final data = (event as html.MessageEvent).data;
-        if (data is Map && data['type'] == 'NOTIFICATION_CLICK') {
-          debugPrint('📱 Mensagem do SW recebida: ${data['notifType']}');
-          _navigateFromNotification(data);
-        }
+      setupWebNotificationListener((data) {
+        debugPrint('📱 Mensagem do SW recebida: ${data['notifType']}');
+        _navigateFromNotification(data);
       });
       debugPrint('✅ Listener de navegação configurado');
     } catch (e) {
