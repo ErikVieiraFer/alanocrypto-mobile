@@ -11,6 +11,7 @@ import 'cupula_chat_preview.dart';
 import 'cupula_posts_preview.dart';
 import 'cupula_lives_preview.dart';
 import 'cupula_sales_screen.dart';
+import 'cupula_portfolio_tabs_screen.dart';
 
 class CupulaMainScreen extends StatefulWidget {
   const CupulaMainScreen({super.key});
@@ -33,6 +34,7 @@ class _CupulaMainScreenState extends State<CupulaMainScreen> {
     CupulaChatPreview(),
     CupulaPostsPreview(),
     CupulaLivesPreview(),
+    CupulaPortfolioTabsScreen(),
   ];
 
   @override
@@ -287,6 +289,11 @@ class _CupulaMainScreenState extends State<CupulaMainScreen> {
                   index: 3,
                   icon: Icons.play_circle_outline,
                   label: 'Lives',
+                ),
+                _buildNavItem(
+                  index: 4,
+                  icon: Icons.account_balance_wallet,
+                  label: 'Carteira',
                 ),
               ],
             ),
