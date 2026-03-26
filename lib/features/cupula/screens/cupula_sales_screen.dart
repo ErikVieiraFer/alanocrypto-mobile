@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../../../theme/app_theme.dart';
 import '../../../services/payment_service.dart';
@@ -190,27 +192,62 @@ class _CupulaSalesScreenState extends State<CupulaSalesScreen>
           _ComparisonSection(),
           SizedBox(height: 80),
 
-          // Preço com animação e botão CTA
-          _PulsatingPrice(
-            isLoading: _isLoading,
-            onSubscribe: _handleSubscribe,
-          ),
-          SizedBox(height: 24),
-
-          // Textos de reassurance
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _ReassuranceText(
-                    icon: Icons.check_circle_outline, text: 'Acesso imediato'),
-                SizedBox(width: 16),
-                _ReassuranceText(
-                    icon: Icons.cancel_outlined, text: 'Cancele quando quiser'),
-              ],
+          if (!kIsWeb && Platform.isIOS)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF1a1f26),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: kNeonGreen.withValues(alpha: 0.3)),
+                ),
+                child: Column(
+                  children: [
+                    Icon(Icons.lock_outline, color: kNeonGreen, size: 48),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Acesso Exclusivo',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      'Para assinar a Cúpula, acesse pelo nosso site ou entre em contato com o suporte.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: AppTheme.textSecondary,
+                        fontSize: 14,
+                        height: 1.5,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          else ...[
+            _PulsatingPrice(
+              isLoading: _isLoading,
+              onSubscribe: _handleSubscribe,
             ),
-          ),
+            const SizedBox(height: 24),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _ReassuranceText(
+                      icon: Icons.check_circle_outline, text: 'Acesso imediato'),
+                  const SizedBox(width: 16),
+                  _ReassuranceText(
+                      icon: Icons.cancel_outlined, text: 'Cancele quando quiser'),
+                ],
+              ),
+            ),
+          ],
           SizedBox(height: 32),
 
           // Banner YouTube
