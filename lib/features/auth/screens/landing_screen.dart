@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../theme/app_theme.dart';
+import '../../legal/screens/privacy_policy_screen.dart';
+import '../../legal/screens/terms_of_use_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -256,20 +258,65 @@ class LandingScreen extends StatelessWidget {
 
                   const SizedBox(height: 24),
 
-                  // Texto de rodapé
-                  Text(
-                    'Termos de Uso • Política de Privacidade',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.white.withValues(alpha: 0.7),
-                      shadows: [
-                        Shadow(
-                          blurRadius: 6,
-                          color: Colors.black.withValues(alpha: 0.6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const TermsOfUseScreen()),
                         ),
-                      ],
-                    ),
-                    textAlign: TextAlign.center,
+                        child: Text(
+                          'Termos de Uso',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white.withValues(alpha: 0.7),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white.withValues(alpha: 0.7),
+                            shadows: [
+                              Shadow(
+                                blurRadius: 6,
+                                color: Colors.black.withValues(alpha: 0.6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Text(
+                        ' • ',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white.withValues(alpha: 0.7),
+                          shadows: [
+                            Shadow(
+                              blurRadius: 6,
+                              color: Colors.black.withValues(alpha: 0.6),
+                            ),
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()),
+                        ),
+                        child: Text(
+                          'Política de Privacidade',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white.withValues(alpha: 0.7),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white.withValues(alpha: 0.7),
+                            shadows: [
+                              Shadow(
+                                blurRadius: 6,
+                                color: Colors.black.withValues(alpha: 0.6),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
