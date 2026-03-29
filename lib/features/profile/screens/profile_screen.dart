@@ -15,6 +15,8 @@ import '../../../services/user_service.dart';
 import '../../../services/notification_preferences_service.dart';
 import '../../../theme/app_theme.dart';
 import '../../../utils/admin_helper.dart';
+import '../../legal/screens/privacy_policy_screen.dart';
+import '../../legal/screens/terms_of_use_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final String? userId;
@@ -480,6 +482,31 @@ class _InfoSection extends StatelessWidget {
             );
           },
         ),
+        if (isOwnProfile) ...[
+          const SizedBox(height: 32),
+          const Text(
+            'Legal',
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(height: 12),
+          _LegalTile(
+            icon: Icons.privacy_tip_outlined,
+            label: 'Política de Privacidade',
+            onTap: (context) => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const PrivacyPolicyScreen()),
+            ),
+          ),
+          const SizedBox(height: 12),
+          _LegalTile(
+            icon: Icons.description_outlined,
+            label: 'Termos de Uso',
+            onTap: (context) => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const TermsOfUseScreen()),
+            ),
+          ),
+        ],
       ],
     );
   }
@@ -666,6 +693,42 @@ class _InfoTile extends StatelessWidget {
             ),
         ],
       ),
+      ),
+    );
+  }
+}
+
+class _LegalTile extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final void Function(BuildContext context) onTap;
+
+  const _LegalTile({required this.icon, required this.label, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => onTap(context),
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: AppTheme.inputBackground,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Icon(icon, color: AppTheme.accentGreen, size: 24),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                label,
+                style: const TextStyle(fontSize: 15, color: Colors.white, fontWeight: FontWeight.w500),
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: Colors.white38, size: 20),
+          ],
+        ),
       ),
     );
   }

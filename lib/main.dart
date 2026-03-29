@@ -12,6 +12,8 @@ import 'theme/app_theme.dart';
 import 'features/auth/screens/landing_screen.dart';
 import 'features/auth/screens/login_screen.dart';
 import 'features/auth/screens/signup_screen.dart';
+import 'features/legal/screens/privacy_policy_screen.dart';
+import 'features/legal/screens/terms_of_use_screen.dart';
 // import 'features/auth/screens/email_verification_screen.dart'; // DESABILITADO - Fluxo direto sem verificação
 import 'features/auth/screens/pending_approval_screen.dart';
 import 'features/dashboard/screen/dashboard_screen.dart';
@@ -247,6 +249,8 @@ class MyApp extends StatelessWidget {
               ModalRoute.of(context)?.settings.arguments as String? ?? 'Página';
           return UnderDevelopmentScreen(pageName: pageName);
         },
+        '/privacidade': (context) => const PrivacyPolicyScreen(),
+        '/termos': (context) => const TermsOfUseScreen(),
       },
     );
   }
