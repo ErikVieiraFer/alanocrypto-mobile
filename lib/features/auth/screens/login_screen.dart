@@ -5,7 +5,6 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../core/utils/password_validator.dart';
-import '../../../services/auth_service.dart';
 import '../../../services/user_service.dart';
 import '../../../theme/app_theme.dart';
 
@@ -20,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _authService = AuthService();
   final _userService = UserService();
   bool _isLoading = false;
   bool _obscurePassword = true;
@@ -120,96 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 Expanded(
                   child: Text(
                     'Erro inesperado: ${e.toString()}',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                  ),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.red.shade700,
-            duration: Duration(seconds: 4),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            margin: EdgeInsets.all(16),
-          ),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
-  }
-
-  Future<void> _loginWithGoogle() async {
-    setState(() => _isLoading = true);
-
-    try {
-      final user = await _authService.signInWithGoogle();
-
-      if (user != null) {
-        final isApproved = await _userService.isUserApproved(user.uid);
-
-        if (mounted) {
-          if (isApproved) {
-            Navigator.pushReplacementNamed(context, '/dashboard');
-          } else {
-            Navigator.pushReplacementNamed(context, '/pending-approval');
-          }
-        }
-      }
-    } on FirebaseAuthException catch (e) {
-      String message = 'Erro ao fazer login com Google';
-
-      if (e.code == 'account-exists-with-different-credential') {
-        message = 'Conta já existe com outro método de login';
-      } else if (e.code == 'invalid-credential') {
-        message = 'Credenciais do Google inválidas';
-      } else if (e.code == 'operation-not-allowed') {
-        message = 'Login com Google não está habilitado';
-      } else if (e.code == 'user-disabled') {
-        message = 'Usuário desativado';
-      } else if (e.code == 'network-request-failed') {
-        message = 'Erro de conexão. Verifique sua internet';
-      } else {
-        message = 'Erro ao fazer login com Google: ${e.code}';
-      }
-
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                Icon(Icons.error_outline, color: Colors.white),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    message,
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
-                  ),
-                ),
-              ],
-            ),
-            backgroundColor: Colors.red.shade700,
-            duration: Duration(seconds: 4),
-            behavior: SnackBarBehavior.floating,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            margin: EdgeInsets.all(16),
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Row(
-              children: [
-                Icon(Icons.error_outline, color: Colors.white),
-                SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    'Erro inesperado ao fazer login: ${e.toString()}',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
                   ),
                 ),
@@ -1148,49 +1056,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             color: AppTheme.accentGreen,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 8),
-
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Divider(
-                              color: AppTheme.textPrimary.withValues(alpha: 0.2),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              'OU',
-                              style: TextStyle(
-                                color: AppTheme.textPrimary.withValues(alpha: 0.6),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Divider(
-                              color: AppTheme.textPrimary.withValues(alpha: 0.2),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      OutlinedButton.icon(
-                        onPressed: _isLoading ? null : _loginWithGoogle,
-                        icon: Icon(Icons.g_mobiledata, size: 32),
-                        label: const Text('Continuar com Google'),
-                        style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          side: BorderSide(
-                            color: AppTheme.textPrimary.withValues(alpha: 0.3),
-                          ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
                           ),
                         ),
                       ),
